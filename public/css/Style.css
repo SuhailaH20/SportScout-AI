@@ -170,8 +170,7 @@ body {
 
 
 .features-section {
-    background-color: #ffffff; /* لون الخلفية */
-    position: relative; /* لجعل الصورة تتداخل مع الخلفية */
+    background-color: #ffffff; 
     padding: 50px 0;
 }
 
