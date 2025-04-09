@@ -1,0 +1,332 @@
+/* Base Styles */
+
+.profile-container {
+  direction: rtl;
+}
+
+.profile-logo {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* تقليل الفجوة */
+  margin-bottom: 15px; /* تقليل الهامش */
+  padding-bottom: 6px; /* تقليل الحشوة */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.profile-logo-icon {
+  width: 24px; /* تقليل الحجم */
+  height: 24px; /* تقليل الحجم */
+  border-radius: 6px; /* تقليل الزوايا */
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px; /* تقليل الحجم */
+}
+
+.profile-logo span {
+  font-size: 14px; /* تقليل الحجم */
+  font-weight: 600;
+}
+
+.profile-nav-menu {
+  list-style: none;
+}
+
+.profile-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* تقليل الفجوة */
+  padding: 8px 10px; /* تقليل الحشوة */
+  margin-bottom: 4px; /* تقليل الهامش */
+  border-radius: 6px; /* تقليل الزوايا */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.profile-nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.profile-nav-item.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+}
+
+.profile-nav-item i {
+  font-size: 14px; /* تقليل الحجم */
+}
+
+/* Main Content Styles */
+.profile-main-content {
+  flex: 1;
+  padding: 10px; /* تقليل الحشوة */
+  width: 1230px; /* تقليل العرض */
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px; /* تقليل الهامش */
+  direction: rtl;
+}
+
+.profile-header-title {
+  font-size: 25px; /* تقليل الحجم */
+  color: #333;
+  font-weight: 600; /* تقليل الوزن */
+}
+
+.profile-save-button {
+  background: linear-gradient(135deg, #11998e 0%, #1d4d69 100%);
+  color: white;
+  border: none;
+  padding: 4px 8px; /* تقليل الحشوة */
+  border-radius: 4px; /* تقليل الزوايا */
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 2px; /* تقليل الفجوة */
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 5px rgba(56, 239, 125, 0.3); /* تقليل الظل */
+}
+
+.profile-save-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(56, 239, 125, 0.4); /* تقليل الظل */
+}
+
+.profile-save-button i {
+  font-size: 14px; /* تقليل الحجم */
+}
+
+/* Profile Card Styles */
+.profile-card {
+  background-color: white;
+  border-radius: 8px; /* تقليل الزوايا */
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* تقليل الظل */
+  direction: rtl;
+  height: 392px;
+}
+
+.profile-card-header {
+  background: linear-gradient(135deg, #255B6C, #3E8C74);
+  color: white;
+  padding: 12px 15px; /* تقليل الحشوة */
+}
+
+.profile-card-header h2 {
+  font-size: 20px; /* تقليل الحجم */
+  margin-bottom: 4px;
+}
+
+.profile-card-header p {
+  opacity: 0.8;
+  font-size: 14px; /* تقليل الحجم */
+}
+
+/* Profile Content */
+.profile-content {
+  display: flex;
+  padding: 10px; /* تقليل الحشوة */
+}
+
+.profile-image-section {
+  width: 180px; /* تقليل العرض */
+  margin-left: 10px; /* تقليل الهامش */
+}
+
+.profile-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* تقليل الظل */
+}
+
+.profile-image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.profile-image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 6px; /* تقليل الحشوة */
+  display: flex;
+  justify-content: center;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.profile-image-container:hover .profile-image-overlay {
+  transform: translateY(0);
+}
+
+.profile-upload-btn {
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 2px; /* تقليل الفجوة */
+  cursor: pointer;
+}
+
+.profile-info-section {
+  flex: 1;
+}
+
+/* Form Styles */
+.profile-form-group {
+  margin-bottom: 10px; /* تقليل الهامش */
+}
+
+.profile-form-row {
+  display: flex;
+  gap: 10px; /* تقليل الفجوة */
+  margin-bottom: 10px; /* تقليل الهامش */
+}
+
+.profile-form-row .profile-form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* تقليل الفجوة */
+  margin-bottom: 4px; /* تقليل الهامش */
+  font-weight: 600;
+  color: #555;
+}
+
+label i {
+  color: #667eea;
+}
+
+.profile-input {
+  width: 100%;
+  padding: 6px 8px; /* تقليل الحشوة */
+  border: 1px solid #ddd;
+  border-radius: 4px; /* تقليل الزوايا */
+  font-size: 14px; /* تقليل الحجم */
+  transition: all 0.3s ease;
+}
+
+.profile-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+/* Stats Card */
+.profile-stats-card .profile-card-header {
+  background: linear-gradient(135deg, #255B6C, #3E8C74);
+}
+
+.profile-stats-content {
+  padding: 10px; /* تقليل الحشوة */
+}
+
+.profile-stats-form {
+  margin-bottom: 15px; /* تقليل الهامش */
+}
+
+.profile-stats-summary {
+  background-color: #f8f9fa;
+  border-radius: 6px; /* تقليل الزوايا */
+  padding: 10px; /* تقليل الحشوة */
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-summary-item {
+  text-align: center;
+  padding: 0 6px; /* تقليل الحشوة */
+}
+
+.profile-summary-label {
+  font-size: 10px; /* تقليل الحجم */
+  color: #666;
+  margin-bottom: 2px; /* تقليل الهامش */
+}
+
+.profile-summary-value {
+  font-size: 18px; /* تقليل الحجم */
+  font-weight: 700;
+  color: #333;
+}
+
+.profile-rating {
+  color: #ffc107;
+  font-size: 14px; /* تقليل الحجم */
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .profile-content {
+    flex-direction: column;
+  }
+  
+  .profile-image-section {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 10px; /* تقليل الهامش */
+  }
+  
+  .profile-image-container {
+    max-width: 250px; /* تقليل العرض */
+    margin: 0 auto;
+  }
+  
+  .profile-form-row {
+    flex-direction: column;
+    gap: 8px; /* تقليل الفجوة */
+  }
+  
+  .profile-stats-summary {
+    flex-direction: column;
+    gap: 8px; /* تقليل الفجوة */
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    flex-direction: column;
+  }
+  
+  .profile-sidebar {
+    width: 100%;
+    padding: 8px; /* تقليل الحشوة */
+  }
+  
+  .profile-nav-menu {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 6px; /* تقليل الحشوة */
+  }
+  
+  .profile-nav-item {
+    white-space: nowrap;
+  }
+  
+  .profile-main-content {
+    padding: 8px; /* تقليل الحشوة */
+  }
+  
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px; /* تقليل الفجوة */
+  }
+  
+  .profile-card {
+    border-radius: 6px; /* تقليل الزوايا */
+  }
+}

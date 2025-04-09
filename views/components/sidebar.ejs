@@ -1,0 +1,43 @@
+<div class="side_bar">
+    <div class="side_bar_top">
+        <div class="picture">
+            <a href="/"> <img src="../img/logoP.png" alt="logo"></a>
+        </div>
+        <div class="info">
+            <h3>اهلا بك</h3>
+            <p>
+                <%= userName %>
+            </p>
+        </div>
+    </div>
+    <div class="side_bar_bottom">
+        <ul>
+            <li class="active" onclick="showContent('dashboard')">
+                <a href="javascript:void(0);">
+                    <span class="item" class="dashboard-item">لوحة التحكم</span>
+                    <span class="icon"><i class="fas fa-home"></i></span>
+                </a>
+            </li>
+            <li onclick="showContent('formContent')">
+                <a href="javascript:void(0);">
+                    <span class="item">اختبار نظري</span>
+                    <span class="icon"><i class="fa fa-compass"></i></i></span>
+                </a>
+            </li>
+            <li onclick="showContent('reports')">
+                <a href="javascript:void(0);">
+                    <span class="item">التقارير</span>
+                    <span class="icon"><i class="far fa-newspaper"></i></span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/logout" class="logout">
+                    <span class="item">تسجيل خروج</span>
+                    <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</div>

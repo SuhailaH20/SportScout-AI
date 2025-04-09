@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة الواجهة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body dir="rtl">
+    <%- include('./Components/navbar.ejs') %>
+
+    <section class="hero-section">
+        <div class="hero-content"><h1>مرحبًا بك في SportScout - بوابتك نحو الاحتراف</h1>
+            <h1>اصقل مهاراتك، أبرز إمكانياتك، وكن في مرأى الكشافين!</h1>
+            <p>انضم إلى الجيل الجديد من الرياضيين، حيث يلتقي الشغف بالاحترافية، ويصبح كل اختبار خطوة نحو تحقيق حلمك الرياضي.</p>
+            
+            <a href="/Main">
+                <button type="button">ابدأ الآن<i class="fa fa-angle-left" aria-hidden="true"></i></button>
+            </a>
+        </div>
+        <div class="hero-image">
+            <img src="img/favpng_football-player-shooting-reaction-training.png" alt="Business Location" />
+        </div>
+        <%- include('./Components/wavy.ejs') %>
+    </section>
+    
+
+    <section class="features-section" id="Services">
+        <div class="container">
+            <h2>خدماتنا</h2> 
+            <div class="row slide-in-left">
+                <div class="col-md-4">
+                    <div class="feature-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>تقييم المهارات</h3>
+                        <p>
+                            نقدم تقييمات شاملة لقياس المهارات الذهنية والبدنية للاعبين واكتشاف المواهب.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-item">
+                        <i class="fas fa-cogs"></i>
+                        <h3>ملفات تعريف اللاعبين</h3>
+                        <p>
+                            نساعد اللاعبين في إنشاء ملفات تعريف مهنية تعرض إنجازاتهم ومهاراتهم.
+                          </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-item">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>رؤية الكشافين</h3>
+                        <p>
+                            نقدم بيانات دقيقة للكشافين لمساعدتهم في اكتشاف المواهب الجديدة.
+                          </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>اكتشاف المواهب</h3>
+                        <p>
+                            نساعد الكشافين في اكتشاف المواهب الشابة والمغمورة.
+                          </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-item">
+                        <i class="fas fa-globe"></i>
+                        <h3>تحليل البيانات</h3>
+                        <p>
+                            ذكاء البيانات بين يديك – تقنيات تحليل رياضي متقدمة تمنحك صورة شاملة عن مستواك.
+                          </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+
+    <section class="how-it-works" id="HowItWorks">
+        <div class="container">
+            <h2>كيف تعمل المنصة؟</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>إنشاء الملف الشخصي</h3>
+                        <p>يبدأ اللاعب رحلته بإنشاء ملفه الشخصي على المنصة، حيث يحدد بياناته الأساسية، مستواه الرياضي، وخبراته السابقة، مما يسهم في بناء صورة متكاملة عن هويته الرياضية.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>إجراء التقييم الشامل</h3>
+                        <p>يخضع اللاعب لاختبار تفاعلي متطور يعتمد على تقنيات الذكاء الاصطناعي، لقياس الجوانب الذهنية، المهارات الفنية، القدرات التكتيكية، والإلمام بقوانين اللعبة، مما يساعد على تحديد نقاط القوة وفرص التطوير بدقة عالية.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>تحليل الأداء باستخدام الذكاء الاصطناعي</h3>
+                        <p>تعتمد المنصة على نماذج ذكاء اصطناعي متقدمة لتحليل البيانات الرياضية واستخلاص مؤشرات دقيقة حول أداء اللاعب، حيث يتم تحويل نتائجه في الاختبارات إلى تحليلات تفصيلية تعكس مدى جاهزيته وقدراته مقارنة بالمعايير الاحترافية.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>عرض الملف الشخصي للكشافين</h3>
+                        <p>يتم تحديث الملف الشخصي للاعب تلقائيًا بالنتائج التحليلية المدعومة بالذكاء الاصطناعي، ليكون مرجعًا موثوقًا للكشافين والمدربين الباحثين عن المواهب الواعدة، مما يزيد من فرص الانضمام إلى الفرق والأندية الاحترافية.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+
+    <section class="about-section" id="About">
+        <div class="container">
+            <h2>من نحن</h2>
+            <p>نحن مجموعة من مهندسات البرمجيات، نتمتع بشغف كبير لتطوير البرمجيات وتطبيق تقنيات الذكاء الاصطناعي.
+                نركز على تقديم حلول مبتكرة تسهم في تعزيز تجربة الرياضة وتحسينها. من خلال مشاركتنا في مسابقة إطلاق دوري الذكاء الاصطناعي،
+                نسعى لإحداث تأثير إيجابي في المجتمع وإيجاد حلول عملية للمشكلات الحقيقية التي تواجهه.</p>
+            <div class="team-members">
+                <div class="member">
+                    <div class="member-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>سهيلة هوساوي</h3>
+                        <p>هندسة برمجيات</p>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="member-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>رشا اليزيدي</h3>
+                        <p>هندسة برمجيات</p>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="member-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>لمار المطيري</h3>
+                        <p>هندسة برمجيات</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+
+
+    <section class="ready-banner">
+        <div class="container">
+            <h2>هل أنت مستعد؟</h2>
+            <p><span class="multitext"> </span></p>
+            <p>ابدأ رحلتك الآن وكن جزءًا من نجاح المستقبل. نحن هنا لدعمك في كل خطوة على الطريق.</p>
+            <a href="/Main" class="btn-ready">ابدأ الآن</a>
+        </div>
+    </section>
+    
+    
+<%- include('./Components/footer.ejs') %>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+        <script>
+            var typingEffect = new Typed(".multitext", {
+                strings: ["لبناء مستقبل مزدهر","لتحقيق أهدافك","لبناء نجاحك"],
+                loop: true,
+                typeSpeed: 90,
+                backSpeed: 80,
+            })
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+    const members = [
+        { name: 'سهيلة', role: 'هندسة برمجيات', info: 'نحن مجموعة من طالبات هندسة البرمجيات...' },
+        { name: 'رشا', role: 'هندسة برمجيات', info: 'نحن مجموعة من طالبات هندسة البرمجيات...' },
+        { name: 'لمار', role: 'هندسة برمجيات', info: 'نحن مجموعة من طالبات هندسة البرمجيات...' },
+    ];
+
+    let index = 0;
+
+    const updateCard = () => {
+        document.querySelector('.member-name').textContent = members[index].name;
+        document.querySelector('.member-role').textContent = members[index].role;
+        document.querySelector('.member-info').textContent = members[index].info;
+    };
+
+    document.querySelector('.prev-btn').addEventListener('click', () => {
+        index = (index - 1 + members.length) % members.length;
+        updateCard();
+    });
+
+    document.querySelector('.next-btn').addEventListener('click', () => {
+        index = (index + 1) % members.length;
+        updateCard();
+    });
+
+    updateCard();
+});
+
+        </script>
+</body>
+
+</html>

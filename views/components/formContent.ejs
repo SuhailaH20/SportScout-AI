@@ -1,0 +1,511 @@
+<div class="location_container">
+    <div id="page" class="site">
+        <div class="container">
+            <div class="form-box">
+
+            <!-- صفحة البداية -->
+            <div id="introPage" class="intro-page">
+                <h2>نظرة عامة على الاختبار</h2>
+                <p>اختبار لتقييم مهاراتك التكتيكية، معرفتك بقوانين اللعبة، ومستوى إدراكك الفني.</p>
+                
+                <!-- تعريف الاختبار -->
+                <div class="test-description" style="margin-top: 20px; background-color: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ddd;">
+                    <h3 style="margin-top: 0;">تعريف الاختبار:</h3>
+                    <p>
+                        يهدف هذا الاختبار إلى تقييم الجوانب الذهنية والمعرفية للاعب كرة القدم، من خلال مجموعة من الأسئلة المتنوعة التي تغطي:
+                    </p>
+                    <ul style="margin-right: 20px; list-style: none; padding-right: 0;">
+                        <li>• الفهم التكتيكي واتخاذ القرار أثناء اللعب</li>
+                        <li>• معرفة القوانين الرسمية للعبة</li>
+                        <li>• الوعي الفني والتصرف في المواقف المختلفة</li>
+                    </ul>
+                    <p>
+                        سيساعدك هذا التقييم في التعرف على نقاط القوة لديك، واكتشاف الجوانب التي يمكن تطويرها في أدائك الذهني داخل الملعب.
+                    </p>
+                </div>
+
+                <button id="startTest" class="btn-start" style="margin-top: 20px;">ابدأ الاختبار</button>
+            </div>
+
+                <!-- نموذج الاختبار -->
+                <form id="testForm" style="display: none;"> <!-- مخفي بشكل افتراضي -->
+                    <!-- السؤال 1 -->
+                    <div class="form-step form-one">
+                        <h2>السؤال 1: المهارات التكتيكية</h2>
+                        <p>انظر إلى الصورة التالية، ما هو أفضل تصرف لتجنب الضغط العالي من الخصم عند بناء الهجمة من الخلف؟</p>
+                        <img src="./img/q1.png" alt="وصف الصورة" style="max-width: 85%; height: auto; margin: 10px 0;"> 
+                        <div class="radio-group">
+                            <label><input type="radio" name="q1" value="A"> تمرير الكرة سريعًا بين المدافعين ثم لمنتصف الملعب</label>
+                            <label><input type="radio" name="q1" value="B"> إرسال كرة طويلة مباشرة إلى الهجوم</label>
+                            <label><input type="radio" name="q1" value="C">  الاحتفاظ بالكرة في منطقة الدفاع حتى يقل الضغط</label>
+                            <label><input type="radio" name="q1" value="D"> التمرير للخلف للحارس وانتظار تقدم الخصم</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn1" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn1" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                    <!-- السؤال 2 -->
+                    <div class="form-step form-one" style="display: none;">
+                        <h2>السؤال 2: المهارات التكتيكية</h2>
+                        <p>في الصورة التالية، الظهير المنافس يراقبك بشكل لصيق. كيف يمكنك خلق مساحة لنفسك؟</p>
+                        <img src="./img/q2.png" alt="وصف الصورة" style="max-width: 85%; height: auto; margin: 10px 0;"> 
+                        <div class="radio-group">
+                            <label><input type="radio" name="q2" value="A"> التحرك نحو الوسط لسحب المدافع معك </label>
+                            <label><input type="radio" name="q2" value="B"> الوقوف في مكانك وانتظار التمريرة</label>
+                            <label><input type="radio" name="q2" value="C"> محاولة التفوق في سباق السرعة فقط</label>
+                            <label><input type="radio" name="q2" value="D"> المطالبة بالكرة في القدم دون محاولة خلق المساحة</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn2" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn2" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                    <!-- السؤال 3 -->
+                    <div class="form-step form-one" style="display: none;">
+                        <h2>السؤال 3: المهارات التكتيكية</h2>
+                        <p>عند مواجهة دفاع متكتل ومنظم، ما هو أفضل أسلوب هجومي لاختراقه؟</p>
+                        <img src="./img/q3.png" alt="وصف الصورة" style="max-width: 85%; height: auto; margin: 10px 0;">
+                        <div class="radio-group">
+                            <label><input type="radio" name="q3" value="A"> استخدام التمريرات القصيرة والسريعة </label>
+                            <label><input type="radio" name="q3" value="B"> إرسال الكرات الطويلة داخل المنطقة</label>
+                            <label><input type="radio" name="q3" value="C"> التسديد العشوائي من خارج المنطقة</label>
+                            <label><input type="radio" name="q3" value="D"> اللعب الفردي ومحاولة المراوغة باستمرار</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn3" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn3" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                    <!-- السؤال 4 -->
+                    <div class="form-step form-one" style="display: none;">
+                        <h2>السؤال 4: المهارات التكتيكية</h2>
+                        <p>الصورة التالية تمثل موقفًا دفاعيًا. ما هو أول شيء يجب أن يفعله المدافعون؟</p>
+                        <img src="./img/q4.png" alt="وصف الصورة" style="max-width: 85%; height: auto; margin: 10px 0;">
+                        <div class="radio-group">
+                            <label><input type="radio" name="q4" value="A"> ترك مساحة في الخلف والتركيز على قطع التمريرات</label>
+                            <label><input type="radio" name="q4" value="B"> التوجه فورًا لمهاجمة حامل الكرة</label>
+                            <label><input type="radio" name="q4" value="C"> التراجع بسرعة لتغطية المساحات </label>
+                            <label><input type="radio" name="q4" value="D"> انتظار اقتراب المهاجمين دون تحرك</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn4" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn4" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                    <!-- السؤال 5 -->
+                    <div class="form-step form-one" style="display: none;">
+                        <h2>السؤال 5: المهارات التكتيكية</h2>
+                        <p>ما هو أفضل تصرف عند تنفيذ ركلة ركنية؟</p>
+                        <img src="./img/q5.png" alt="وصف الصورة" style="max-width: 85%; height: auto; margin: 10px 0;">
+                        <div class="radio-group">
+                            <label><input type="radio" name="q5" value="A"> إرسال الكرة داخل المنطقة بلا تخطيط</label>
+                            <label><input type="radio" name="q5" value="B"> إرسال كرة قصيرة لاستغلال المساحات </label>
+                            <label><input type="radio" name="q5" value="C"> العودة للدفاع دون المشاركة في الهجمة</label>
+                            <label><input type="radio" name="q5" value="D"> محاولة التسديد مباشرة من الركلة الركنية</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn5" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn5" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+                    
+                    <!-- السؤال 6 -->
+                    <div class="form-step form-two" style="display: none;">
+                        <h2>السؤال 6: المهارات الفنية</h2>
+                        <p>تلقيت تمريرة عالية وأنت تحت ضغط من المدافع. ما هي أفضل طريقة للسيطرة على الكرة؟</p>
+                        <img src="./img/q6.png" alt="وصف الصورة" style="max-width: 85%; height: auto; margin: 10px 0;">
+                        <div class="radio-group">
+                            <label><input type="radio" name="q6" value="A"> استخدام الصدر لامتصاص الكرة وإنزالها</label>
+                            <label><input type="radio" name="q6" value="B"> ضرب الكرة مباشرة للأمام دون تحكم</label>
+                            <label><input type="radio" name="q6" value="C"> السيطرة عليها بباطن القدم حتى لو ارتدت قليلًا</label>
+                            <label><input type="radio" name="q6" value="D"> تمريرها بالرأس للخلف دون رؤية واضحة</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn6" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn6" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+                    
+                    <!-- السؤال 7 -->
+                    <div class="form-step form-two" style="display: none;">
+                        <h2>السؤال 7: المهارات الفنية</h2>
+                        <p>أنت تلعب كجناح، ولديك مساحة للتقدم، كيف يكون أفضل تصرف؟</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q7" value="A"> التسديد من أي مكان حتى لو لم يكن لديك زاوية جيدة</label>
+                            <label><input type="radio" name="q7" value="B"> التقدم بالكرة بسرعة والبحث عن زميل في منطقة الجزاء</label>
+                            <label><input type="radio" name="q7" value="C"> العودة بالكرة للخلف للحفاظ على الاستحواذ</label>
+                            <label><input type="radio" name="q7" value="D">  الوقوف بالكرة وانتظار المدافعين</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn7" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn7" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                    <!-- السؤال 8 -->
+                    <div class="form-step form-two" style="display: none;">
+                        <h2>السؤال 8: المهارات الفنية</h2>
+                        <p>حصلت على فرصة للتسديد على المرمى من خارج منطقة الجزاء، كيف تنفذ التسديدة بشكل مثالي؟</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q8" value="A"> تسدد بقوة دون الاهتمام بالدقة</label>
+                            <label><input type="radio" name="q8" value="B"> تسدد بباطن القدم الضعيفة حتى لو لم تكن مرتاحًا</label>
+                            <label><input type="radio" name="q8" value="C"> تحاول رفع الكرة للأعلى دائمًا</label>
+                            <label><input type="radio" name="q8" value="D"> تستخدم مشط القدم لتوجيه الكرة بقوة ودقة</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn8" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn8" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                    <!-- السؤال 9 -->
+                    <div class="form-step form-two" style="display: none;">
+                        <h2>السؤال 9: المهارات الفنية</h2>
+                        <p>أثناء تنفيذ رمية تماس، لاحظت أن أحد زملائك غير مراقب. كيف تتصرف؟</p>
+                        <img src="./img/q9.png" alt="وصف الصورة" style="max-width: 85%; height: auto; margin: 10px 0;">
+                        <div class="radio-group">
+                            <label><input type="radio" name="q9" value="A"> ترمي الكرة بقوة نحو منطقة جزاء الخصم</label>
+                            <label><input type="radio" name="q9" value="B"> تنتظر حتى يتمركز الفريق جيدًا قبل التمرير</label>
+                            <label><input type="radio" name="q9" value="C"> تلعبها بسرعة إلى زميلك لبدء الهجمة</label>
+                            <label><input type="radio" name="q9" value="D"> ترميها للخلف للحفاظ على الكرة</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn9" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn9" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                    <!-- السؤال 10 -->
+                    <div class="form-step form-two" style="display: none;">
+                        <h2>السؤال 10: المهارات الفنية</h2>
+                        <p>: أثناء مواجهة لاعب واحد ضد واحد، كيف تتصرف للمراوغة بفعالية؟</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q10" value="A"> تسدد الكرة بعيدًا وتلاحقها</label>
+                            <label><input type="radio" name="q10" value="B"> تستخدم المراوغات البطيئة أمام المدافع</label>
+                            <label><input type="radio" name="q10" value="C"> تركض بسرعة بدون أي مراوغة</label>
+                            <label><input type="radio" name="q10" value="D"> تحاول تغيير الاتجاه والمراوغة باستخدام الجسد</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn10" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn10" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+                    
+                    <!-- السؤال 11 -->
+                    <div class="form-step form-three" style="display: none;">
+                        <h2>السؤال 11: قوانين اللعبة</h2>
+                        <p>ما هو الحد الأقصى لعدد التبديلات المسموح بها في المباريات الرسمية حسب قوانين FIFA لعام 2024؟</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q11" value="A"> 3 تبديلات</label>
+                            <label><input type="radio" name="q11" value="B"> 5 تبديلات</label>
+                            <label><input type="radio" name="q11" value="C"> 7 تبديلات</label>
+                            <label><input type="radio" name="q11" value="D"> لا يوجد حد للتبديلات</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn11" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn11" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                    <!-- السؤال 12 -->
+                    <div class="form-step form-three" style="display: none;">
+                        <h2>السؤال 12: قوانين اللعبة</h2>
+                        <p>إذا لمس المدافع الكرة بيده داخل منطقة الجزاء بشكل غير مقصود، ماذا يقرر الحكم؟</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q12" value="A"> يحتسب ركلة جزاء</label>
+                            <label><input type="radio" name="q12" value="B"> يستمر اللعب إذا لم تكن الحركة مقصودة </label>
+                            <label><input type="radio" name="12" value="C"> يعطي المدافع بطاقة صفراء</label>
+                            <label><input type="radio" name="q12" value="D"> يُعاد تنفيذ الهجمة</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn12" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn12" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                    <!-- السؤال 13 -->
+                    <div class="form-step form-three" style="display: none;">
+                        <h2>السؤال 13: قوانين اللعبة</h2>
+                        <p>ما هي العقوبة إذا قام لاعب بتوجيه إهانة لفظية للحكم؟</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q13" value="A"> بطاقة حمراء مباشرة </label>
+                            <label><input type="radio" name="q13" value="B"> تحذير شفهي فقط</label>
+                            <label><input type="radio" name="q13" value="C"> لا يوجد عقوبة</label>
+                            <label><input type="radio" name="q13" value="D"> ركلة حرة غير مباشرة للفريق الآخر</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn13" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn13" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                    <!-- السؤال 14 -->
+                    <div class="form-step form-three" style="display: none;">
+                        <h2>السؤال 14: قوانين اللعبة</h2>
+                        <p>متى يتم إعادة تنفيذ ركلة الجزاء؟</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q14" value="A"> إذا لمس الحارس الكرة بيديه قبل التنفيذ</label>
+                            <label><input type="radio" name="q14" value="B">  إذا لم يسجل اللاعب الهدف</label>
+                            <label><input type="radio" name="q14" value="C"> إذا دخل أحد اللاعبين منطقة الجزاء قبل تنفيذ الركلة </label>
+                            <label><input type="radio" name="q14" value="D"> إذا خرجت الكرة مباشرة خارج الملعب</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn14" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn14" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                    <!-- السؤال 15 -->
+                    <div class="form-step form-three" style="display: none;">
+                        <h2>السؤال 15: قوانين اللعبة</h2>
+                        <p>ما هو الحد الأدنى لعدد اللاعبين المسموح به لاستمرار المباراة؟</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q15" value="A"> 5 لاعبين</label>
+                            <label><input type="radio" name="q15" value="B"> 9 لاعبين</label>
+                            <label><input type="radio" name="q15" value="C"> 6 لاعبين</label>
+                            <label><input type="radio" name="q15" value="D"> 7 لاعبين</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn15" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn15" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                                        
+                    <!-- 1السؤال 6 -->
+                    <div class="form-step form-three" style="display: none;">
+                        <h2>السؤال 16: قوانين اللعبة</h2>
+                        <p>ما العقوبة التي تُفرض على لاعب يعرقل منافسًا بتهور؟</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q16" value="A"> بطاقة صفراء </label>
+                            <label><input type="radio" name="q16" value="B"> بطاقة حمراء مباشرة</label>
+                            <label><input type="radio" name="q16" value="C"> تحذير شفوي فقط </label>
+                            <label><input type="radio" name="q16" value="D"> لا يُحتسب أي خطأ</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn16" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn16" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                    <!-- السؤال 17 -->
+                    <div class="form-step form-four" style="display: none;">
+                        <h2>السؤال 17: المهارات الذهنية</h2>
+                        <p> فريقك متأخر بنتيجة 1-0 في آخر 10 دقائق من المباراة، والخصم بدأ بإضاعة الوقت. كيف تتصرف؟</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q17" value="A"> تحتج على الحكم بشدة لكسب الوقت</label>
+                            <label><input type="radio" name="q17" value="B"> تحاول ارتكاب أخطاء تكتيكية لإيقاف اللعب</label>
+                            <label><input type="radio" name="q17" value="C"> تطلب من زملائك إرسال كرات طويلة مباشرة إلى منطقة الخصم</label>
+                            <label><input type="radio" name="q17" value="D">  تحافظ على هدوئك وتحث فريقك على الضغط العالي</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn17" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn17" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                    <!-- السؤال 18 -->
+                    <div class="form-step form-four" style="display: none;">
+                        <h2>السؤال 18: قوانين اللعبة</h2>
+                        <p>أثناء مباراة حاسمة، ارتكب زميلك في الفريق خطأً كاد أن يكلفكم هدفًا، كيف تتصرف؟</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q18" value="A"> تلومه بشدة أمام الجميع</label>
+                            <label><input type="radio" name="q18" value="B">تتجاهل الأمر تمامًا</label>
+                            <label><input type="radio" name="q18" value="C"> تشجعه وتطلب منه التركيز وعدم التكرار</label>
+                            <label><input type="radio" name="q18" value="D"> تتحدث معه لاحقًا بعد انتهاء المباراة</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn18" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn18" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                    <!-- السؤال 19 -->
+                    <div class="form-step form-four" style="display: none;">
+                        <h2>السؤال 19: قوانين اللعبة</h2>
+                        <p>أثناء تنفيذ ركلة ركنية، لاحظت أن دفاع الخصم يترك مساحات فارغة عند القائم البعيد. كيف تستفيد من ذلك؟</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q19" value="A"> ترفع الكرة إلى القائم القريب</label>
+                            <label><input type="radio" name="q19" value="B">  تتواصل مع زميلك وتوجهه للتمركز عند القائم البعيد</label>
+                            <label><input type="radio" name="q19" value="C"> تسدد الكرة مباشرة باتجاه المرمى</label>
+                            <label><input type="radio" name="q19" value="D"> تلعب الكرة قصيرة للحفاظ على الاستحواذ</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn19" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn19" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                    <!-- السؤال 20 -->
+                    <div class="form-step form-four" style="display: none;">
+                        <h2>السؤال 20: قوانين اللعبة</h2>
+                        <p>تلعب كمدافع، وأحد مهاجمي الفريق الخصم سريع جدًا ويحاول استغلال سرعته لاختراق الدفاع. كيف تتعامل معه؟</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q20" value="A"> تلعب بخشونة لإيقافه</label>
+                            <label><input type="radio" name="q20" value="B"> تتراجع للخلف وتستخدم التوقيت المناسب لقطع الكرة</label>
+                            <label><input type="radio" name="q20" value="C"> تتركه للحارس ليتعامل معه</label>
+                            <label><input type="radio" name="q20" value="D"> تحاول استخلاص الكرة بسرعة بأي شكل</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn20" style="display: none;" class="btn-small">السابق</button>
+                            <button type="button" id="nextBtn20" class="btn-small">التالي</button>
+                        </div>
+                    </div>
+
+                                        
+                    <!--21 السؤال  -->
+                    <div class="form-step form-four" style="display: none;">
+                        <h2>السؤال 21: قوانين اللعبة</h2>
+                        <p> أثناء المباراة، لاحظت أن الفريق المنافس بدأ بالضغط العالي على دفاع فريقك. كيف تتصرف؟</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q21" value="A"> تلعب كرات طويلة لتجنب الضغط</label>
+                            <label><input type="radio" name="q21" value="B"> تحاول الاحتفاظ بالكرة حتى يتم قطعها</label>
+                            <label><input type="radio" name="q21" value="C"> تطلب من الفريق الهدوء وتدوير الكرة بسرعة</label>
+                            <label><input type="radio" name="q21" value="D"> تمرر الكرة للخلف لحارس المرمى وانتظار الخصم للضغط أكثر</label>
+                        </div>
+                        <div class="navigation-buttons">
+                            <button type="button" id="prevBtn21" style="display: none;" class="btn-small">السابق</button>
+                            <button type="submit" id="submitBtn" class="btn-small">إرسال</button>
+                        </div>
+                    </div>
+                    
+                                        
+                    
+                  
+                    
+                </form>
+
+                <!-- المؤقت -->
+                <div id="timer">الوقت: 00:00</div>
+
+                <!-- Steps sidebar -->
+                <div class="progress">
+                    <div class="logo"><span>..</span>اهلا بك</div>
+                    <ul class="progress-steps">
+                        <li class="step active">
+                            <span>١</span>
+                            <p>المهارات التكتيكية</p>
+                        </li>
+                        <li class="step">
+                            <span>٢</span>
+                            <p>المهارات الفنية</p>
+                        </li>
+                        <li class="step">
+                            <span>٣</span>
+                            <p>قوانين اللعبة </p>
+                        </li>
+                        <li class="step">
+                            <span>4</span>
+                            <p>الجوانب الذهنية</p>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End of sidebar -->
+            </div>
+        </div>
+    </div>
+    <!-- End of location container -->
+</div>
+
+<!-- JavaScript لتبديل الصفحات وحساب النتيجة -->
+<script>
+    document.getElementById('startTest').addEventListener('click', function() {
+        document.getElementById('introPage').style.display = 'none';
+        document.getElementById('testForm').style.display = 'block'; // عرض نموذج الاختبار
+        document.querySelector('.form-one').style.display = 'block'; // عرض القسم الأول
+    });
+
+    // Navigation logic
+    let currentStep = 1;
+
+    function showStep(step) {
+        document.querySelectorAll('.form-step').forEach((el, index) => {
+            el.style.display = (index + 1 === step) ? 'block' : 'none';
+        });
+        document.getElementById(`prevBtn${step}`).style.display = step === 1 ? 'none' : 'inline';
+    }
+
+    document.querySelectorAll('[id^=nextBtn]').forEach((button, index) => {
+        button.addEventListener('click', () => {
+            currentStep++;
+            showStep(currentStep);
+        });
+    });
+
+    document.querySelectorAll('[id^=prevBtn]').forEach((button, index) => {
+        button.addEventListener('click', () => {
+            currentStep--;
+            showStep(currentStep);
+        });
+    });
+
+    showStep(currentStep); // Show the first step initially
+
+    let timerInterval;
+    let seconds = 0;
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            seconds++;
+            const minutes = Math.floor(seconds / 60);
+            const displaySeconds = seconds % 60;
+            document.getElementById('timer').textContent = `الوقت: ${minutes}:${displaySeconds < 10 ? '0' : ''}${displaySeconds}`;
+        }, 1000);
+    }
+
+    // استدعاء دالة startTimer عند بدء الاختبار
+    document.getElementById('startTest').addEventListener('click', function() {
+        document.getElementById('introPage').style.display = 'none';
+        document.getElementById('testForm').style.display = 'block'; // عرض نموذج الاختبار
+        document.querySelector('.form-one').style.display = 'block'; // عرض القسم الأول
+        startTimer(); // بدء المؤقت
+    });
+
+    // حساب النتيجة
+    document.getElementById('submitBtn').addEventListener('click', function(event) {
+        event.preventDefault(); // منع الإرسال الافتراضي للنموذج
+        
+        // الإجابات الصحيحة
+        const correctAnswers = {
+            q1: 'A',
+            q2: 'A',
+            q3: 'A',
+            q4: 'C',
+            q5: 'B',
+            q6: 'A',
+            q7: 'B',
+            q8: 'D',
+            q9: 'C',
+            q10: 'D',
+            q11: 'C',
+            q12: 'B',
+            q13: 'A',
+            q14: 'C',
+            q15: 'D',
+            q16: 'A',
+            q17: 'D',
+            q18: 'C',
+            q19: 'B',
+            q20: 'B',
+            q21: 'C',
+        };
+
+        let score = 0; // لتخزين عدد الإجابات الصحيحة
+
+        // التحقق من كل سؤال
+        for (const [question, correctAnswer] of Object.entries(correctAnswers)) {
+            const selectedAnswer = document.querySelector(`input[name="${question}"]:checked`);
+            if (selectedAnswer && selectedAnswer.value === correctAnswer) {
+                score++;
+            }
+        }
+
+        // عرض النتيجة النهائية
+        alert(`لقد حصلت على ${score} من ${Object.keys(correctAnswers).length} إجابات صحيحة!`);
+    });
+</script>

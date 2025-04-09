@@ -1,0 +1,164 @@
+<div class="profile-main-content">
+  <div class="profile-container">
+    <div class="profile-card">
+      <div class="profile-card-header">
+        <h2>المعلومات الشخصية</h2>
+        <p>قم بتعديل معلوماتك الشخصية</p>
+      </div>
+      <div class="profile-content">
+        <div class="profile-image-section">
+          <div class="profile-image-container">
+            <img src="img/profile.png" alt="صورة اللاعب" id="profile-image">
+          </div>
+        </div>
+        <div class="profile-info-section">
+          <div class="profile-form-group">
+            <label for="fullname">
+              <i class="fas fa-user"></i>
+              الاسم الكامل
+            </label>
+            <p><%= userName %></p>
+          </div>
+          <div class="profile-form-group">
+            <label for="email">
+              <i class="fas fa-envelope"></i>
+              البريد الإلكتروني
+            </label>
+            <input type="email" id="email" class="profile-input" placeholder="أدخل بريدك الإلكتروني" value="mohammed@email.com">
+          </div>
+          <div class="profile-form-row">
+            <div class="profile-form-group">
+              <label for="birthdate">
+                <i class="fas fa-calendar"></i>
+                تاريخ الميلاد
+              </label>
+              <input type="date" id="birthdate" class="profile-input" value="2001-03-15">
+            </div>
+            <div class="profile-form-group">
+              <label for="position">
+                <i class="fas fa-running"></i>
+                المركز
+              </label>
+              <select id="position" class="profile-input">
+                <option value="striker">مهاجم</option>
+                <option value="midfielder" selected>وسط مهاجم</option>
+                <option value="defender">مدافع</option>
+                <option value="goalkeeper">حارس مرمى</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-card profile-stats-card">
+      <div class="profile-card-header">
+        <h2>الإحصائيات</h2>
+        <p>أدخل إحصائياتك الرياضية</p>
+      </div>
+      <div class="profile-stats-content">
+        <div class="profile-stats-form">
+          <div class="profile-form-row">
+            <div class="profile-form-group">
+              <label for="goals">
+                <i class="fas fa-futbol"></i>
+                عدد الأهداف
+              </label>
+              <input type="number" id="goals" class="profile-input" min="0" value="12">
+            </div>
+            <div class="profile-form-group">
+              <label for="assists">
+                <i class="fas fa-shoe-prints"></i>
+                عدد التمريرات الحاسمة
+              </label>
+              <input type="number" id="assists" class="profile-input" min="0" value="7">
+            </div>
+            <div class="profile-form-group">
+              <label for="rating">
+                <i class="fas fa-star"></i>
+                تقييم الموسم
+              </label>
+              <input type="number" id="rating" class="profile-input" min="0" step="0.1" value="7.5">
+            </div>
+          </div>
+          <div class="profile-form-row">
+            <div class="profile-form-group">
+              <label for="matches">
+                <i class="fas fa-clipboard-list"></i>
+                عدد المباريات
+              </label>
+              <input type="number" id="matches" class="profile-input" min="0" value="20">
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-stats-summary">
+          <div class="profile-summary-item">
+            <div class="profile-summary-label">التقييم المتوقع</div>
+            <div class="profile-summary-value" id="expected-rating">--</div>
+          </div>
+          <div class="profile-summary-item">
+            <div class="profile-summary-label">مقدار التحسن</div>
+            <div class="profile-summary-value" id="improvement">--</div>
+          </div>
+          <div class="profile-summary-item">
+            <div class="profile-summary-label">التوصيات</div>
+            <ul id="recommendations"></ul>
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+  </div>
+
+  <button class="profile-save-button" onclick="submitForm()">
+    <i class="fas fa-save"></i>
+    حفظ التغييرات
+  </button>  
+</div>
+
+<script>
+async function submitForm() {
+    console.log("زر الحفظ تم الضغط عليه");
+
+    const data = {
+        goals: parseInt(document.getElementById('goals').value),
+        assists: parseInt(document.getElementById('assists').value),
+        rating: parseFloat(document.getElementById('rating').value),
+        matches: parseInt(document.getElementById('matches').value)
+    };
+
+    try {
+        const response = await fetch('http://localhost:5001/predict', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+        console.log("النتيجة من الخادم:", result);
+
+        if (result.error) {
+            alert('حدث خطأ: ' + result.error);
+            return;
+        }
+
+        // تحديث العناصر
+        document.getElementById('expected-rating').innerText = result.result.predicted_rating || '--';
+        document.getElementById('improvement').innerText = result.result.improvement || '--';
+
+        // تحديث التوصيات
+        let recList = document.getElementById('recommendations');
+        recList.innerHTML = "";
+        (result.result.performance_analysis || []).forEach(rec => { // تأكد من استخدام الحقل الصحيح
+            let li = document.createElement('li');
+            li.textContent = rec; // تأكد من أن هذا هو العنصر الصحيح
+            recList.appendChild(li);
+        });
+
+    } catch (err) {
+        console.error('Request error:', err);
+    }
+}
+</script>

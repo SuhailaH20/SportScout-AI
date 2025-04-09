@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج</title>
+    <link rel="stylesheet" href="../css/Formstyles.css">
+    <link rel="stylesheet" href="../css/report.css">
+    <link rel="stylesheet" href="../css/recommendations.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Include Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>   
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Include sidebar -->
+        <div id="sidebar">
+            <%- include('../components/sidebar') %>
+        </div>
+
+        <!-- Main content area -->
+        <div class="main_content">
+            <!-- Include dashboard -->
+            <div id="dashboard" class="content-container active">
+                <%- include('../components/dashboard') %>
+            </div>
+
+            <!-- Include form -->
+            <div id="formContent" class="content-container">
+                <%- include('../components/formContent', { activities: activities, neighborhoods: neighborhoods }) %>
+            </div>
+            
+            <div id="reports" class="content-container" style="margin: -20px 8px 2px 2px;">
+                <%- include('../components/report', { combinedData: combinedData }) %>
+            </div>
+            
+            <!-- Recommendations part -->
+            <div id="recommendations" class="content-container">
+                <%- include('../components/recommendations', { activities: activities, neighborhoods: neighborhoods }) %>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/Formscripts.js"></script>   
+    <script src="../js/MainScript.js"></script>
+    <script src="../js/report.js"></script>
+    <script src="../js/recommendations.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

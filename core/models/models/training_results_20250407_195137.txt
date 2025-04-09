@@ -1,0 +1,17 @@
+=== Model Training Summary ===
+Training time: 0.46 seconds
+Training samples: 972
+Test samples: 244
+
+=== Evaluation Metrics ===
+MAE: 0.01297618819064782
+MSE: 0.0007118426921856863
+RMSE: 0.026680380285627234
+R2: 0.9961782569743899
+Explained Variance: 0.9961791370545571
+Accuracy ±0.5: 1.0
+Inference Time (sec): 1.6400071441150104e-05
+
+=== Cross-Validation ===
+Mean R2: 0.9895
+Std R2: 0.0150
