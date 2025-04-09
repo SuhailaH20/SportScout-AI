@@ -14,7 +14,7 @@ sys.path.append(str(BASE_DIR))
 class PlayerPredictor:
     def __init__(self, model_path: str = None):
         """تهيئة النموذج مع تحميل المكونات المطلوبة"""
-        self.model_path = model_path or r'C:\Users\PC\OneDrive\Documents\me\Hackthones\AI League\LAST-Code - Copy\LAST-Code - Copy\trained_model.pkl'
+        self.model_path = model_path or r'trained_model.pkl'
         self.model, self.scaler, self.features = self._load_components()
         self.thresholds = {
             'goals': 0.2,
