@@ -51,7 +51,7 @@ A data-driven platform for comprehensive football player evaluation, talent disc
 ## Usage
 1. **Start Backend Services**:
    ```bash
-   node app.js  # Starts Express server on port 4001
+   npm run watch  # Starts Express server on port 4001
    python app.py  # Starts Flask API on port 5001
    ```
 2. Access the web interface at `http://localhost:4001`
