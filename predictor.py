@@ -14,7 +14,7 @@ sys.path.append(str(BASE_DIR))
 class PlayerPredictor:
     def __init__(self, model_path: str = None):
         """تهيئة النموذج مع تحميل المكونات المطلوبة"""
-        self.model_path = model_path or r'trained_model.pkl'
+        self.model_path = model_path or r'player_rating_model_20250410_141658.pkl'
         self.model, self.scaler, self.features = self._load_components()
         self.thresholds = {
             'goals': 0.2,
@@ -64,34 +64,40 @@ class PlayerPredictor:
             return {'error': str(e)}
     
     def _validate_input(self, data: Dict):
-        """التحقق من صحة بيانات المدخلات"""
-        required_fields = ['Goals', 'Assists', 'Seasons Ratings', 'Matches']
-        for field in required_fields:
-            if field not in data:
-                raise ValueError(f"المجال المطلوب '{field}' غير موجود")
-            if not isinstance(data[field], (int, float)):
-                raise ValueError(f"المجال '{field}' يجب أن يكون رقمًا")
+     required_fields = ['Goals', 'Assists', 'Seasons Ratings', 'Matches']
+     for field in required_fields:
+        if field not in data:
+            raise ValueError(f"المجال المطلوب '{field}' غير موجود")
+        if not isinstance(data[field], (int, float)):
+            raise ValueError(f"المجال '{field}' يجب أن يكون رقمًا")
+    
+     # Validate ranges
+     if data['Matches'] < 1:
+        raise ValueError("عدد المباريات يجب أن يكون على الأقل 1")
+     if data['Goals'] < 0 or data['Assists'] < 0:
+        raise ValueError("عدد الأهداف أو التمريرات لا يمكن أن يكون سالبًا")
+     if data['Seasons Ratings'] < 0 or data['Seasons Ratings'] > 10:
+        raise ValueError("التقييم الموسمي يجب أن يكون بين 0 و 10")
+     if data['Goals'] > data['Matches'] * 3:  # Max 3 goals per match
+        raise ValueError("عدد الأهداف غير واقعي")
+     if data['Assists'] > data['Matches'] * 2:  # Max 2 assists per match
+        raise ValueError("عدد التمريرات غير واقعي")
+    
     
     def _preprocess_data(self, data: Dict) -> pd.DataFrame:
-        """معالجة مسبقة لبيانات اللاعب"""
-        input_df = pd.DataFrame([data])
-        
-        # تجنب القسمة على الصفر
-        if data['Matches'] == 0:
-            raise ValueError("عدد المباريات يجب أن يكون أكبر من صفر")
-        
-        # حساب الميزات
-        input_df['Goals_Per_Match'] = input_df['Goals'] / input_df['Matches']
-        input_df['Assists_Per_Match'] = input_df['Assists'] / input_df['Matches']
-        input_df['Contribution_Per_Match'] = (input_df['Goals'] + input_df['Assists']) / input_df['Matches']
-        input_df['Performance_Ratio'] = input_df['Seasons Ratings'] / input_df['Matches']
-        input_df['Efficiency'] = (input_df['Goals'] * 0.7 + input_df['Assists'] * 0.3) / input_df['Matches']
-        
-        # تطبيع البيانات
-        input_df[self.features] = self.scaler.transform(input_df[self.features])
-        
-        return input_df
+     input_df = pd.DataFrame([data])
     
+     # Remove problematic features
+     input_df['Goals_Per_Match'] = input_df['Goals'] / input_df['Matches']
+     input_df['Assists_Per_Match'] = input_df['Assists'] / input_df['Matches']
+     input_df['Contribution_Per_Match'] = (input_df['Goals'] + input_df['Assists']) / input_df['Matches']
+    
+     # Remove these features:
+     # input_df['Performance_Ratio'] = ...  # Flawed logic
+     # input_df['Efficiency'] = ...         # Redundant
+    
+     input_df[self.features] = self.scaler.transform(input_df[self.features])
+     return input_df
     def _analyze_results(self, stats: Dict, future_rating: float) -> Dict:
         """تحليل شامل للنتائج"""
         gpm = stats['Goals'] / stats['Matches']
