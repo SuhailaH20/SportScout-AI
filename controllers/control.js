@@ -93,26 +93,22 @@ const GetRecommendations = async (req, res) => {
 
 
 // POST requests
-// POST route لإنشاء حساب
 const createPost = async (req, res) => {
   try {
     const { name, phoneNumber, email, password } = req.body;
     console.log('Received phoneNumber:', phoneNumber);
     
-    // التحقق من الحقول المطلوبة
     if (!name || !phoneNumber || !email || !password) {
         return res.status(400).json({ message: 'جميع الحقول مطلوبة' });
     }
 
-    // تحقق من أن الاسم ثلاثي (بالإنجليزية أو بالعربية)
     const namePattern = /^([\u0621-\u064A]+\s?){2,3}$|^([a-zA-Z]+\s?){2,3}$/;
-    const nameParts = name.trim().split(/\s+/); // تقسيم الاسم إلى أجزاء
+    const nameParts = name.trim().split(/\s+/); 
 
     if (nameParts.length < 3 || nameParts.length > 3 || !namePattern.test(name)) {
         return res.status(400).json({ message: 'الرجاء مطابقة شروط الاسم' });
     }
 
-    // التأكد من أن كلمة المرور غير فارغة وتفي بالشروط
     const trimmedPassword = password.trim();
     if (!trimmedPassword || 
         trimmedPassword.length < 8 || 
@@ -122,10 +118,8 @@ const createPost = async (req, res) => {
         return res.status(400).json({ message: 'الرجاء مطابقة شروط كلمة المرور' });
     }
    
-    // تنظيف رقم الهاتف
     const trimmedPhoneNumber = phoneNumber.trim();
 
-    // تحقق من صحة رقم الهاتف (مثال: يجب أن يتكون من 10 أرقام)
     const phonePattern = /^\d{10}$/;
     if (!phonePattern.test(trimmedPhoneNumber)) {
         return res.status(400).json({ message: 'الرجاء مطابقة شروط رقم الهاتف' });
@@ -136,7 +130,6 @@ const createPost = async (req, res) => {
         return res.json({ message: 'المستخدم مسجل مسبقا' });
     }
 
-    // تحقق من صحة البريد الإلكتروني
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
         return res.status(400).json({ message: 'البريد الإلكتروني غير صالح.' });
@@ -243,5 +236,46 @@ const saveRecommendation = async (req, res) => {
   }
 };
 
+const TestResult = require('../modelss/FormSubmission');
 
-module.exports = { indexrout, createPost, createGet, MainGet,saveRecommendation, submitForm,GetRecommendations,successGet,logout };
+const submitTest = async (req, res) => {
+    console.log('تم استدعاء دالة submitTest');
+    try {
+        console.log('بيانات الطلب (req.body):', req.body);
+
+        const {
+            q1, q2, q3, q4, q5,
+            q6, q7, q8, q9, q10,
+            q11, q12, q13, q14, q15,
+            q16, q17, q18, q19, q20, q21,
+            timeTaken 
+        } = req.body;
+
+        console.log('معرف المستخدم في الجلسة:', req.session.userId);
+
+        if (!req.session.userId) {
+            console.log('خطأ: المستخدم غير مصادق');
+            return res.status(401).send('User not authenticated');
+        }
+
+        const newResult = new TestResult({
+            userId: req.session.userId,
+            q1, q2, q3, q4, q5,
+            q6, q7, q8, q9, q10,
+            q11, q12, q13, q14, q15,
+            q16, q17, q18, q19, q20, q21,
+            timeTaken: parseInt(timeTaken) 
+        });
+
+        console.log('كائن TestResult قبل الحفظ:', newResult);
+
+        await newResult.save();
+        console.log('تم حفظ البيانات بنجاح');
+        res.redirect('/pages/success.html');
+    } catch (err) {
+        console.error("فشل الحفظ:", err);
+        res.status(500).send(`حدث خطأ أثناء حفظ البيانات: ${err.message}`);
+    }
+};
+
+module.exports = { indexrout, createPost, createGet, MainGet,saveRecommendation, submitForm,GetRecommendations,successGet,logout, submitTest };

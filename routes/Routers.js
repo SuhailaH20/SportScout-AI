@@ -18,5 +18,6 @@ router.post('/createAccount', userController.createPost);
 router.post('/submitForm', userController.submitForm);
 router.post('/saveRecommendation', userController.saveRecommendation);
 
+router.post('/submitTest', userController.submitTest);
 
 module.exports = router;

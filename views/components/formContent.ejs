@@ -26,8 +26,9 @@
                     <button id="startTest" class="btn-start" style="margin-top: 20px;">ابدأ الاختبار</button>
                 </div>
 
-                <form id="testForm" style="display: none;">
-
+                <form id="testForm" style="display: none;" action="/submitTest" method="POST">
+                    <input type="hidden" id="timeTaken" name="timeTaken" value="">
+                    <input type="hidden" id="staticTime" name="staticTime" value="12345">
                     <div class="form-step group-1">
                         <h2>السؤال 1: المهارات التكتيكية</h2>
                         <p>انظر إلى الصورة التالية، ما هو أفضل تصرف لتجنب الضغط العالي من الخصم عند بناء الهجمة من الخلف؟</p>
