@@ -287,15 +287,16 @@ input, select {
     padding: 40px 48px;
     text-align: center;
 }
+
 .logo span {
     color: var(--main-color);
 }
 
-/* progress steps*/
+/* progress steps */
 .progress ul.progress-steps li {
     position: relative;
     display: flex;
-    align-items: center; /* محاذاة العناصر بشكل مركزي */
+    align-items: flex-start; 
 }
 
 .progress ul.progress-steps li > span {
@@ -312,20 +313,22 @@ input, select {
     z-index: 1;
 }
 
-/* إضافة حد أدنى للعرض للنص */
-.progress ul.progress-steps li p {
-    min-width: 150px; /* يمكنك تعديل القيمة حسب الحاجة */
-    text-align: right; /* محاذاة النص إلى اليمين */
+.progress ul.progress-steps li div {
+    min-width: 250px; 
+    text-align: center; 
 }
+
 .progress ul.progress-steps {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: row;
-    gap: 2em;
+    gap: 2em; 
 }
 
-/* progress steps circles*/
+.progress ul.progress-steps li div small {
+    color: #888; 
+}
 
 
 /* progress steps circles when active*/
@@ -343,6 +346,10 @@ input, select {
     display: none;
 }
 
+.progress-steps {
+    list-style-type: none;
+    padding: 0;
+}
 
 /* Form styles*/
 .form-box form {
@@ -385,10 +392,10 @@ form > div:not(.btn-group) {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .content-container {
-    display: none; /* إخفاء جميع المحتويات */
+    display: none;
 }
 .content-container.active {
-    display: block; /* عرض المحتوى النشط فقط */
+    display: block;
 }
 
 @keyframes fadeIn {
@@ -572,6 +579,7 @@ form > div.active {
         position: relative;
         top: auto;
         font-size: inherit;
+        text-align: center;
     }
     .progress ul.progress-steps li p span {
         display: block;
@@ -585,22 +593,18 @@ form > div.active {
 
 
 
-
-
-/* تنسيق مجموعة الراديو */
-
 .radio-group {
-    margin-top: 10px; /* مسافة أعلى المجموعة */
+    margin-top: 10px; 
 }
 .radio-group input[type="radio"] {
-    margin-left: 10px; /* مسافة بين خيار الراديو والنص */
+    margin-left: 10px; 
 }
 .radio-group label {
     direction: rtl;
     padding: 5px;
-    margin-right: 10px; /* مسافة بين الخيارات */
-    margin-bottom: 10px; /* مسافة أسفل كل خيار */
-    display: block; /* جعل كل خيار في سطر منفصل */
+    margin-right: 10px;
+    margin-bottom: 10px; 
+    display: block; 
 }
 
 form label {
@@ -610,24 +614,24 @@ form label {
 }
 
 .navigation-buttons {
-    display: flex; /* استخدام الفليكس */
-    gap: 300px; /* تباعد بين الأزرار */
-    margin-top: 20px; /* إضافة تباعد فوق الأزرار */
-    justify-content: flex-end; /* محاذاة الأزرار إلى اليمين */
+    display: flex;
+    gap: 300px;
+    margin-top: 20px; 
+    justify-content: flex-end; 
 }
 
 .btn-small, .btn-start {
     width: 20%;
     background-color: var(--main-color);
     color: white;
-    padding: 5px 10px; /* تقليل الحجم */
+    padding: 5px 10px;
     border: none;
     border-radius: 15px;
     cursor: pointer;
     border: 4px solid var(--secondary-color);
     border-radius: 25px;
 }
-.form-step { display: none; } /* إخفاء جميع الأسئلة */
+.form-step { display: none; } 
 
 .btn-start, .navigation-buttons button {
     padding: 4px 2px;
@@ -648,8 +652,8 @@ form label {
     padding: 3em 1em;
     background-color: white;
     border-radius: 30px 30px 15px 15px;
-    text-align: right; /* محاذاة النص إلى اليمين */
-    direction: rtl; /* تعيين اتجاه النص إلى اليمين */
+    text-align: right; 
+    direction: rtl; 
 }
 .btn-start:hover, .navigation-buttons button:hover {
     background-color: var(--dark-color);
@@ -657,9 +661,9 @@ form label {
 }
 
 #timer {
-    position: absolute; /* جعل العنصر مطلق */
-    top: 20px; /* المسافة من الأعلى */
-    left: 20px; /* المسافة من اليسار */
-    font-size: 18px; /* حجم الخط */
-    color: #333; /* لون النص */
+    position: absolute; 
+    top: 20px; 
+    left: 20px;
+    font-size: 18px; 
+    color: #333;
 }
