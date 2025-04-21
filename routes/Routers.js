@@ -7,16 +7,14 @@ const { isAuthenticated } = require('../middlewares/auth');
 router.get('/', userController.indexrout);
 router.get('/pages/login.html', loginController.userLogin);
 router.get('/pages/createAccount.html', userController.createGet);
-router.get('/get_recommendations',userController.GetRecommendations )
 router.get('/pages/success.html', userController.successGet)
 router.get('/logout', userController.logout);
 // Protect the dashboard route
 router.get('/Main', isAuthenticated, userController.MainGet); 
 // POST requests
 router.post('/login', loginController.UserLoginPost);
-router.post('/createAccount', userController.createPost);
+router.post('/createAccount', userController.registerUser);
 router.post('/submitForm', userController.submitForm);
-router.post('/saveRecommendation', userController.saveRecommendation);
 
 router.post('/submitTest', userController.submitTest);
 

@@ -1,7 +1,5 @@
 // control.js
-const User = require('../modelss/Schema');
 const FormSubmission = require('../modelss/BusinessSchema'); 
-const SavedRecommendation = require('../modelss/SavedRecommendation');  
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 const { logout } = require('../middlewares/auth');
@@ -53,14 +51,10 @@ const MainGet = async (req, res) => {
       }
     });
 
-    // Fetch data from SavedRecommendation collection
-    const savedRecommendations = await SavedRecommendation.find({ userId }).lean();
-    savedRecommendations.forEach(item => {
-      item.type = 'اقتراح';
-    });
+
 
     // Combine data from both sources
-    const combinedData = [...formSubmissions, ...savedRecommendations];
+    const combinedData = [...formSubmissions];
 
     // Pass everything to the EJS view, including combined data and location details
     res.render('pages/Main', { activities, neighborhoods, userName, combinedData });
@@ -91,68 +85,6 @@ const GetRecommendations = async (req, res) => {
             res.render('pages/success');
     };
 
-
-// POST requests
-const createPost = async (req, res) => {
-  try {
-    const { name, phoneNumber, email, password } = req.body;
-    console.log('Received phoneNumber:', phoneNumber);
-    
-    if (!name || !phoneNumber || !email || !password) {
-        return res.status(400).json({ message: 'جميع الحقول مطلوبة' });
-    }
-
-    const namePattern = /^([\u0621-\u064A]+\s?){2,3}$|^([a-zA-Z]+\s?){2,3}$/;
-    const nameParts = name.trim().split(/\s+/); 
-
-    if (nameParts.length < 3 || nameParts.length > 3 || !namePattern.test(name)) {
-        return res.status(400).json({ message: 'الرجاء مطابقة شروط الاسم' });
-    }
-
-    const trimmedPassword = password.trim();
-    if (!trimmedPassword || 
-        trimmedPassword.length < 8 || 
-        !/[A-Z]/.test(trimmedPassword) || 
-        !/[a-z]/.test(trimmedPassword) || 
-        !/[0-9]/.test(trimmedPassword)) {
-        return res.status(400).json({ message: 'الرجاء مطابقة شروط كلمة المرور' });
-    }
-   
-    const trimmedPhoneNumber = phoneNumber.trim();
-
-    const phonePattern = /^\d{10}$/;
-    if (!phonePattern.test(trimmedPhoneNumber)) {
-        return res.status(400).json({ message: 'الرجاء مطابقة شروط رقم الهاتف' });
-    }
-
-    const existingUserByPhone = await User.findOne({ phoneNumber: trimmedPhoneNumber });
-    if (existingUserByPhone) {
-        return res.json({ message: 'المستخدم مسجل مسبقا' });
-    }
-
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-        return res.status(400).json({ message: 'البريد الإلكتروني غير صالح.' });
-    }
-
-    const hashedPassword = await bcrypt.hash(password.trim(), 10);
-
-    const user = new User({
-      name,
-      phoneNumber: trimmedPhoneNumber,
-      email,
-      password: hashedPassword 
-    });
-
-    console.log('Saving user:', user);
-    await user.save();
-    return res.redirect('/pages/login.html');
-    
-  } catch (error) {
-    console.error('Error saving user:', error);
-    res.status(500).send('Internal Server Error');
-  }
-};
 
 // Controller function to handle form submission
 const submitForm = async (req, res) => {
@@ -200,42 +132,6 @@ const submitForm = async (req, res) => {
   }
 };
 
-const saveRecommendation = async (req, res) => {
-  try {
-      const { userId, recommendation } = req.body;
-
-      if (!recommendation || !recommendation.summary) {
-          console.log('Incomplete recommendation data:', recommendation);
-          return res.status(400).send('Recommendation data is incomplete.');
-      }
-
-     
-      const normalizedNearbyPois = recommendation.nearby_pois.map(poi => 
-          typeof poi === 'string' 
-              ? { name: poi, type: 'unknown' }  // Assign a default `type` for string entries
-              : poi  // Keep the original object if it's already in the correct format
-      );
-
-      const savedRecommendation = new SavedRecommendation({
-          userId: req.session.userId,
-          summary: recommendation.summary,
-          success_rate: recommendation.success_rate,
-          nearby_pois: normalizedNearbyPois, 
-          competitors: recommendation.competitors,
-          location: {
-              lat: recommendation.lat,
-              lng: recommendation.lng
-          }
-      });
-
-      await savedRecommendation.save();
-      res.status(200).send('Recommendation saved successfully');
-  } catch (error) {
-      console.error('Error saving recommendation:', error);
-      res.status(500).send('Internal Server Error');
-  }
-};
-
 const TestResult = require('../modelss/FormSubmission');
 
 const submitTest = async (req, res) => {
@@ -278,4 +174,72 @@ const submitTest = async (req, res) => {
     }
 };
 
-module.exports = { indexrout, createPost, createGet, MainGet,saveRecommendation, submitForm,GetRecommendations,successGet,logout, submitTest };
+const { Scout, Player } = require('../modelss/Schema');
+
+const registerUser = async (req, res) => {
+    try {
+        const { name, phoneNumber, email, password, accountType, birthdate, organization, experience, location } = req.body;
+
+        // تحقق من الحقول الأساسية المشتركة
+        if (!name || !phoneNumber || !email || !password || !accountType || !location) {
+            return res.status(400).json({ message: 'جميع الحقول الأساسية مطلوبة' });
+        }
+
+        const existingScoutByPhone = await Scout.findOne({ phoneNumber });
+        const existingScoutByEmail = await Scout.findOne({ email });
+        const existingPlayerByPhone = await Player.findOne({ phoneNumber });
+        const existingPlayerByEmail = await Player.findOne({ email });
+
+        if ((accountType === 'scout' && (existingScoutByPhone || existingScoutByEmail)) ||
+            (accountType === 'player' && (existingPlayerByPhone || existingPlayerByEmail))) {
+            return res.status(409).json({ message: `رقم الهاتف أو البريد الإلكتروني مسجل مسبقًا` });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        if (accountType === 'scout') {
+            if (!organization || !experience) {
+                return res.status(400).json({ message: 'جميع حقول الكشاف مطلوبة' });
+            }
+            const newScout = new Scout({
+                name,
+                phoneNumber,
+                email,
+                password: hashedPassword,
+                organization,
+                experience: parseInt(experience),
+                location,
+                accountType
+            });
+            await newScout.save();
+            return res.redirect('/pages/login.html');
+        } else if (accountType === 'player') {
+            if (!birthdate) {
+                return res.status(400).json({ message: 'جميع حقول اللاعب مطلوبة' });
+            }
+            const newPlayer = new Player({
+                name,
+                phoneNumber,
+                email,
+                password: hashedPassword,
+                birthdate,
+                location,
+                accountType
+            });
+            await newPlayer.save();
+            return res.redirect('/pages/login.html');
+        } else {
+            return res.status(400).json({ message: 'نوع الحساب غير صالح' });
+        }
+
+    } catch (error) {
+        console.error('Error registering user:', error);
+        if (error.errors) {
+            const validationErrors = Object.values(error.errors).map(err => err.message);
+            return res.status(400).json({ message: 'حدث خطأ في التحقق من البيانات', errors: validationErrors });
+        }
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+module.exports = { indexrout, createGet, MainGet, submitForm,GetRecommendations,successGet,logout, submitTest, registerUser };
