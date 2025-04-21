@@ -6,7 +6,7 @@ body {
 }
 
 .bg-image {
-  background-image: url('../img/Group 49 (6).svg'); /* تأكد من أن المسار صحيح */
+  background-image: url("../img/Group 49 (6).svg"); /* تأكد من أن المسار صحيح */
   background-size: 100%;
   background-position: center;
   position: relative;
@@ -34,12 +34,12 @@ body {
 }
 
 .btn-custom {
-  background: linear-gradient(135deg, #1C4A69, #3E8C74);
+  background: linear-gradient(135deg, #1c4a69, #3e8c74);
   color: #fafafa;
   margin-top: 15px;
   margin-bottom: 20px;
   width: 45%;
-  padding: 5px; 
+  padding: 5px;
   transition: 0.3s ease;
 }
 .btn-custom:hover {
@@ -49,44 +49,44 @@ body {
 .button-container {
   display: flex;
   justify-content: center;
-  width: 100%; 
+  width: 100%;
 }
 
 .form-footer {
   text-align: center;
-  width: 100%; 
+  width: 100%;
   margin-top: 20px;
 }
 
+/* Icon styling */
+.input-container {
+  position: relative;
+}
 
-  /* Icon styling */
-  .input-container {
-    position: relative;
-  }
-  
-  .input-container i.fa,.input-container i.fas{
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #3E8C74;
-    font-size: 18px;
-    transition: 0.3s ease;
-  }
-  
-  .input-container input {
-    padding-left: 40px; /* Space for the icon */
-  }
-  
-  .input-container input:focus + i {
-    color: #1C4A69; /* Change icon color on focus */
-  }
-  
-  /* Hover effect for icon */
-  .input-container i:hover {
-    transform: scale(1.1);
-  }
-  
+.input-container i.fa,
+.input-container i.fas {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #3e8c74;
+  font-size: 18px;
+  transition: 0.3s ease;
+}
+
+.input-container input {
+  padding-left: 40px; /* Space for the icon */
+}
+
+.input-container input:focus + i {
+  color: #1c4a69; /* Change icon color on focus */
+}
+
+/* Hover effect for icon */
+.input-container i:hover {
+  transform: scale(1.1);
+}
+
 /* Form separator styling */
 .form-separator {
   position: relative;
@@ -100,7 +100,7 @@ body {
   left: 0;
   right: 0;
   top: 50%;
-  border-bottom: 2px solid #3E8C74;
+  border-bottom: 2px solid #3e8c74;
   animation: lineAnimation 0.5s ease-in-out;
 }
 
@@ -115,9 +115,57 @@ body {
 
 .form-separator span {
   position: relative;
-  background-color: #F8F9FA;
+  background-color: #f8f9fa;
   padding: 0 10px;
   font-size: 16px;
-  color: #3E8C74;
+  color: #3e8c74;
 }
 
+/* Account type buttons styling */
+.btn-scout {
+  background: linear-gradient(135deg, #1c4a69, #3e8c74);
+  color: #fafafa;
+  border: none;
+  border-radius: 50px;
+  padding: 8px 24px;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.btn-scout:hover {
+  transform: scale(1.05);
+  color: #fff;
+}
+
+.btn-outline-primary {
+  color: #1c4a69;
+  background-color: transparent;
+  border: 1px solid #1c4a69;
+  border-radius: 50px;
+  padding: 8px 24px;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: rgba(28, 74, 105, 0.1);
+  transform: scale(1.05);
+}
+
+/* Date input styling for RTL */
+input[type="date"] {
+  direction: rtl;
+}
+
+/* Make sure error messages appear correctly */
+.text-danger {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.875rem;
+}
+
+/* Form transition animation */
+#scoutForm,
+#playerForm {
+  transition: all 0.3s ease-in-out;
+}
