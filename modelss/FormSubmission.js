@@ -23,7 +23,11 @@ const testResultSchema = new mongoose.Schema({
     q19: { type: String },
     q20: { type: String },
     q21: { type: String },
-    timeTaken: { type: Number }
+    timeTaken: {
+        type: String,
+        required: true
+    },
+      
 }, { timestamps: true });
 
 module.exports = mongoose.model('TestResult', testResultSchema);

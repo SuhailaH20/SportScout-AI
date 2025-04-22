@@ -9,6 +9,7 @@ const progressSteps = document.querySelectorAll('.progress-steps .step');
 const startButton = document.getElementById('startTest');
 const introPage = document.getElementById('introPage');
 const testForm = document.getElementById('testForm');
+const timeTakenInput = document.getElementById("timeTaken"); 
 
 function showQuestion(index) {
     formSteps.forEach((step, i) => {
@@ -34,7 +35,7 @@ function updateNavigationButtons() {
     if (currentNextButton) {
         currentNextButton.textContent = currentQuestion < formSteps.length - 1 ? 'التالي' : 'إرسال';
         currentNextButton.onclick = (event) => {
-            event.preventDefault();
+            event.preventDefault(); 
             saveAnswer();
 
             if (currentQuestion < formSteps.length - 1) {
@@ -42,36 +43,7 @@ function updateNavigationButtons() {
                 showQuestion(currentQuestion);
             } else {
                 stopTimer();
-
-                const endTime = new Date();
-                console.log("startTime:", startTime);
-                console.log("endTime:", endTime);
-
-                const timeTaken = startTime ? endTime.getTime() - startTime.getTime() : 0;
-                console.log('المدة بالمللي ثانية:', timeTaken);
-
-                const formData = {
-                    timeTaken: timeTaken.toString(), // تأكد أنه نص
-                    ...answers
-                };
-
-                fetch('/submitTest', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                })
-                .then(response => {
-                    if (response.ok) {
-                        window.location.href = '/pages/success.html';
-                    } else {
-                        return response.text().then(text => { throw new Error(text) });
-                    }
-                })
-                .catch(error => {
-                    console.error('خطأ أثناء الإرسال:', error);
-                });
+                document.getElementById('hiddenSubmitBtn').click();
             }
         };
     }
@@ -94,7 +66,6 @@ function updateSidebar() {
     });
 
     if (introPage.style.display !== 'none') {
-        // إذا كانت صفحة البداية لا تزال ظاهرة، فعّل المرحلة 1
         progressSteps[0].classList.add('active');
         console.log(`  تفعيل الخطوة 1 (الحالة الابتدائية)`);
     } else if (currentQuestion >= 0 && currentQuestion < 5) {
@@ -131,7 +102,6 @@ function stopTimer() {
     clearInterval(timer);
 }
 
-// قم باستدعاء updateSidebar() مرة واحدة عند تحميل الصفحة لضبط الحالة الابتدائية
 updateSidebar();
 
 startButton.addEventListener('click', () => {
@@ -140,9 +110,25 @@ startButton.addEventListener('click', () => {
     currentQuestion = 0;
     showQuestion(currentQuestion);
     startTimer();
-    updateSidebar(); // تحديث السايد بار بعد بدء الاختبار
+    updateSidebar();
 });
 
 formSteps.forEach((step, index) => {
     if (index !== 0) step.style.display = 'none';
+});
+
+document.getElementById("testForm").addEventListener("submit", (event) => {
+    const endTime = new Date();
+    const timeTakenMillis = endTime.getTime() - startTime.getTime();
+
+    if (!isNaN(timeTakenMillis)) {
+        const timeTakenSeconds = Math.floor(timeTakenMillis / 1000);
+        const minutes = Math.floor(timeTakenSeconds / 60);
+        const seconds = timeTakenSeconds % 60;
+        const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        document.getElementById("timeTaken").value = formattedTime; 
+    } else {
+        console.error("حدث خطأ في حساب الوقت.");
+        document.getElementById("timeTaken").value = "";
+    }
 });

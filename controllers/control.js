@@ -3,6 +3,8 @@ const FormSubmission = require('../modelss/BusinessSchema');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 const { logout } = require('../middlewares/auth');
+const { Scout, Player } = require('../modelss/Schema');
+const TestResult = require('../modelss/FormSubmission');
 
 
 const indexrout = (req, res) => {
@@ -132,7 +134,7 @@ const submitForm = async (req, res) => {
   }
 };
 
-const TestResult = require('../modelss/FormSubmission');
+
 
 const submitTest = async (req, res) => {
     console.log('تم استدعاء دالة submitTest');
@@ -154,13 +156,34 @@ const submitTest = async (req, res) => {
             return res.status(401).send('User not authenticated');
         }
 
+        let timeTakenInSeconds = 0;
+
+        if (timeTaken && typeof timeTaken === 'string') {
+            const parts = timeTaken.split(':');
+            if (parts.length === 2) {
+                const minutes = parseInt(parts[0], 10);
+                const seconds = parseInt(parts[1], 10);
+                if (!isNaN(minutes) && !isNaN(seconds)) {
+                    timeTakenInSeconds = (minutes * 60) + seconds;
+                } else {
+                    console.error("فشل في تحويل وقت الاختبار إلى ثواني:", timeTaken);
+                    timeTakenInSeconds = 0;
+                }
+            } else {
+                console.error("تنسيق وقت الاختبار غير صالح:", timeTaken);
+                timeTakenInSeconds = 0; 
+            }
+        } else if (typeof timeTaken === 'number') {
+            timeTakenInSeconds = timeTaken; 
+        }
+
         const newResult = new TestResult({
             userId: req.session.userId,
             q1, q2, q3, q4, q5,
             q6, q7, q8, q9, q10,
             q11, q12, q13, q14, q15,
             q16, q17, q18, q19, q20, q21,
-            timeTaken: parseInt(timeTaken) 
+            timeTaken: timeTakenInSeconds 
         });
 
         console.log('كائن TestResult قبل الحفظ:', newResult);
@@ -174,7 +197,6 @@ const submitTest = async (req, res) => {
     }
 };
 
-const { Scout, Player } = require('../modelss/Schema');
 
 const registerUser = async (req, res) => {
     try {
