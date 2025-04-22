@@ -86,13 +86,33 @@ function saveAnswer() {
 }
 
 function updateSidebar() {
+    console.log("تنفيذ updateSidebar()");
+    console.log("قيمة currentQuestion:", currentQuestion);
+
     progressSteps.forEach((step, index) => {
         step.classList.remove('active');
-        const currentGroup = Math.ceil((currentQuestion + 1) / 5);
-        if (index === currentGroup) {
-            step.classList.add('active');
-        }
     });
+
+    if (introPage.style.display !== 'none') {
+        // إذا كانت صفحة البداية لا تزال ظاهرة، فعّل المرحلة 1
+        progressSteps[0].classList.add('active');
+        console.log(`  تفعيل الخطوة 1 (الحالة الابتدائية)`);
+    } else if (currentQuestion >= 0 && currentQuestion < 5) {
+        progressSteps[1].classList.add('active');
+        console.log(`  تفعيل الخطوة 2 (الأسئلة 1-5)`);
+    } else if (currentQuestion >= 5 && currentQuestion < 10) {
+        progressSteps[2].classList.add('active');
+        console.log(`  تفعيل الخطوة 3 (الأسئلة 6-10)`);
+    } else if (currentQuestion >= 10 && currentQuestion < 15) {
+        progressSteps[3].classList.add('active');
+        console.log(`  تفعيل الخطوة 4 (الأسئلة 11-15)`);
+    } else if (currentQuestion >= 15 && currentQuestion < 21) {
+        progressSteps[4].classList.add('active');
+        console.log(`  تفعيل الخطوة 5 (الأسئلة 16-21)`);
+    } else if (currentQuestion >= 21) {
+        progressSteps[5].classList.add('active');
+        console.log(`  تفعيل الخطوة 6 (صفحة الإحصائيات)`);
+    }
 }
 
 function startTimer() {
@@ -111,12 +131,16 @@ function stopTimer() {
     clearInterval(timer);
 }
 
+// قم باستدعاء updateSidebar() مرة واحدة عند تحميل الصفحة لضبط الحالة الابتدائية
+updateSidebar();
+
 startButton.addEventListener('click', () => {
     introPage.style.display = 'none';
     testForm.style.display = 'block';
     currentQuestion = 0;
     showQuestion(currentQuestion);
     startTimer();
+    updateSidebar(); // تحديث السايد بار بعد بدء الاختبار
 });
 
 formSteps.forEach((step, index) => {
