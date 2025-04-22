@@ -19,51 +19,62 @@ const createGet = (req, res) => {
 
 // Get request form
 const MainGet = async (req, res) => {
-  try {
-    // Fetch external data
-    const response = await axios.get('http://localhost:5001/');
-    const activities = response.data.activities;
-    const neighborhoods = response.data.neighborhoods;
-    const userName = req.session.userName;
-    const userId = req.session.userId;
+    try {
+        // Fetch external data
+        const response = await axios.get('http://localhost:5001/');
+        const activities = response.data.activities;
+        const neighborhoods = response.data.neighborhoods;
+        const userName = req.session.userName;
+        const userId = req.session.userId;
 
-    if (!userId) {
-      return res.status(401).send('User not authenticated');
-    }
-
-    // Fetch data from FormSubmission collection
-    const formSubmissions = await FormSubmission.find({ userId }).lean();
-
-    // Parse step4Result for each form submission and add the location info
-    formSubmissions.forEach(item => {
-      item.type = 'طلب مدخل';
-      
-      // Parse step4Result string into a JavaScript object
-      if (item.step4Result) {
-        const step4Data = JSON.parse(item.step4Result);
-        
-        // Extract relevant location data from step4Result
-        if (step4Data[0]) {
-          item.location = {
-            lat: step4Data[0].lat,
-            lng: step4Data[0].lng,
-            nearbyPOIs: step4Data[0].nearby_pois
-          };
+        if (!userId) {
+            return res.status(401).send('User not authenticated');
         }
-      }
-    });
 
+        const user = await (req.session.accountType === 'player' ? Player.findById(userId) : Scout.findById(userId)).select('email birthdate name').lean();
 
+        let userEmail = user ? user.email : '';
+        let userBirthdate = user ? (user.birthdate ? user.birthdate.toISOString().split('T')[0] : '') : '';
+        const currentUserName = user ? user.name : userName; // استخدام اسم المستخدم من قاعدة البيانات إذا كان متاحًا
 
-    // Combine data from both sources
-    const combinedData = [...formSubmissions];
+        // Fetch data from FormSubmission collection
+        const formSubmissions = await FormSubmission.find({ userId }).lean();
 
-    // Pass everything to the EJS view, including combined data and location details
-    res.render('pages/Main', { activities, neighborhoods, userName, combinedData });
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    res.status(500).send('Error fetching data');
-  }
+        // Parse step4Result for each form submission and add the location info
+        formSubmissions.forEach(item => {
+            item.type = 'طلب مدخل';
+
+            // Parse step4Result string into a JavaScript object
+            if (item.step4Result) {
+                const step4Data = JSON.parse(item.step4Result);
+
+                // Extract relevant location data from step4Result
+                if (step4Data[0]) {
+                    item.location = {
+                        lat: step4Data[0].lat,
+                        lng: step4Data[0].lng,
+                        nearbyPOIs: step4Data[0].nearby_pois
+                    };
+                }
+            }
+        });
+
+        // Combine data from both sources
+        const combinedData = [...formSubmissions];
+
+        // Pass everything to the EJS view, including combined data and user details
+        res.render('pages/Main', {
+            activities,
+            neighborhoods,
+            userName: currentUserName,
+            combinedData,
+            userEmail,
+            userBirthdate
+        });
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).send('Error fetching data');
+    }
 };
 
 
