@@ -26,7 +26,10 @@ const testResultSchema = new mongoose.Schema({
     timeTaken: {
         type: String,
         required: true
-    },
+    },goals: { type: Number },
+    assists: { type: Number },
+    rating: { type: Number },
+    matches: { type: Number },
       
 }, { timestamps: true });
 

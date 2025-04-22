@@ -146,6 +146,7 @@ const submitTest = async (req, res) => {
             q6, q7, q8, q9, q10,
             q11, q12, q13, q14, q15,
             q16, q17, q18, q19, q20, q21,
+            goals, assists, rating, matches,
             timeTaken 
         } = req.body;
 
@@ -183,10 +184,10 @@ const submitTest = async (req, res) => {
             q6, q7, q8, q9, q10,
             q11, q12, q13, q14, q15,
             q16, q17, q18, q19, q20, q21,
-            timeTaken: timeTakenInSeconds 
+            timeTaken: timeTakenInSeconds , goals, assists, rating, matches
         });
-
-        console.log('كائن TestResult قبل الحفظ:', newResult);
+        console.log("إحصائيات اللاعب:", { goals, assists, rating, matches });
+        console.log('TestResult قبل الحفظ:', newResult);
 
         await newResult.save();
         console.log('تم حفظ البيانات بنجاح');
