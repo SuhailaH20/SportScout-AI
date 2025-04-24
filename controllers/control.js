@@ -171,19 +171,23 @@ const submitTest = async (req, res) => {
         console.log('بيانات الطلب (req.body):', req.body);
 
         const {
-            q1, q2, q3, q4, q5,
-            q6, q7, q8, q9, q10,
-            q11, q12, q13, q14, q15,
-            q16, q17, q18, q19, q20, q21,
-            goals, assists, rating, matches,
-            timeTaken 
-        } = req.body;
+              answers,
+              goals, assists, rating, matches,
+              timeTaken
+            } = req.body;
+            
+            const {
+              q1, q2, q3, q4, q5,
+              q6, q7, q8, q9, q10,
+              q11, q12, q13, q14, q15,
+              q16, q17, q18, q19, q20, q21
+            } = answers;
+            
 
         console.log('معرف المستخدم في الجلسة:', req.session.userId);
 
         if (!req.session.userId) {
-            console.log('خطأ: المستخدم غير مصادق');
-            return res.status(401).send('User not authenticated');
+            return res.status(401).json({ success: false, error: 'User not authenticated' });
         }
 
         let timeTakenInSeconds = 0;
@@ -201,11 +205,61 @@ const submitTest = async (req, res) => {
                 }
             } else {
                 console.error("تنسيق وقت الاختبار غير صالح:", timeTaken);
-                timeTakenInSeconds = 0; 
+                timeTakenInSeconds = 0;
             }
         } else if (typeof timeTaken === 'number') {
-            timeTakenInSeconds = timeTaken; 
+            timeTakenInSeconds = timeTaken;
         }
+
+        const correctAnswers = {
+            q1: 'A',
+            q2: 'A',
+            q3: 'A',
+            q4: 'C',
+            q5: 'B',
+            q6: 'A',
+            q7: 'B',
+            q8: 'D',
+            q9: 'C',
+            q10: 'D',
+            q11: 'C',
+            q12: 'B',
+            q13: 'A',
+            q14: 'C',
+            q15: 'D',
+            q16: 'A',
+            q17: 'D',
+            q18: 'C',
+            q19: 'B',
+            q20: 'B',
+            q21: 'C',
+        };
+
+        let correctCount = 0;
+        if (q1 === correctAnswers.q1) correctCount++;
+        if (q2 === correctAnswers.q2) correctCount++;
+        if (q3 === correctAnswers.q3) correctCount++;
+        if (q4 === correctAnswers.q4) correctCount++;
+        if (q5 === correctAnswers.q5) correctCount++;
+        if (q6 === correctAnswers.q6) correctCount++;
+        if (q7 === correctAnswers.q7) correctCount++;
+        if (q8 === correctAnswers.q8) correctCount++;
+        if (q9 === correctAnswers.q9) correctCount++;
+        if (q10 === correctAnswers.q10) correctCount++;
+        if (q11 === correctAnswers.q11) correctCount++;
+        if (q12 === correctAnswers.q12) correctCount++;
+        if (q13 === correctAnswers.q13) correctCount++;
+        if (q14 === correctAnswers.q14) correctCount++;
+        if (q15 === correctAnswers.q15) correctCount++;
+        if (q16 === correctAnswers.q16) correctCount++;
+        if (q17 === correctAnswers.q17) correctCount++;
+        if (q18 === correctAnswers.q18) correctCount++;
+        if (q19 === correctAnswers.q19) correctCount++;
+        if (q20 === correctAnswers.q20) correctCount++;
+        if (q21 === correctAnswers.q21) correctCount++;
+
+        const totalQuestions = 21;
+        const testScore = (correctCount / totalQuestions) * 100;
 
         const newResult = new TestResult({
             userId: req.session.userId,
@@ -213,14 +267,15 @@ const submitTest = async (req, res) => {
             q6, q7, q8, q9, q10,
             q11, q12, q13, q14, q15,
             q16, q17, q18, q19, q20, q21,
-            timeTaken: timeTakenInSeconds , goals, assists, rating, matches
+            timeTaken: timeTakenInSeconds, goals, assists, rating, matches,
+            testScore: testScore 
         });
         console.log("إحصائيات اللاعب:", { goals, assists, rating, matches });
         console.log('TestResult قبل الحفظ:', newResult);
 
         await newResult.save();
         console.log('تم حفظ البيانات بنجاح');
-        res.redirect('/pages/success.html');
+        res.json({ success: true, testScore: Math.round(testScore) }); 
     } catch (err) {
         console.error("فشل الحفظ:", err);
         res.status(500).send(`حدث خطأ أثناء حفظ البيانات: ${err.message}`);
