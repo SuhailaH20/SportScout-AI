@@ -1,0 +1,338 @@
+.scout-wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.scout-side-bar {
+  width: 250px;
+  height: 100%;
+  background: linear-gradient(180deg, #1c4a69, #3e8c74);
+  position: relative;
+  overflow: hidden;
+}
+
+.scout-main-container {
+  width: 1230px; 
+  padding: 30px;
+  overflow: auto;
+}
+
+.scout-side-bar .scout-side-bar-top {
+  height: 250px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.scout-side-bar .scout-side-bar-top .scout-picture {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.scout-side-bar .scout-side-bar-top .scout-picture img {
+  width: 80px;
+  height: 80px;
+}
+
+.scout-side-bar .scout-side-bar-top .scout-info h3 {
+  text-align: center;
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.scout-side-bar .scout-side-bar-top .scout-info p {
+  font-size: 16px;
+  text-align: center;
+  color: #fff;
+}
+
+.scout-side-bar .scout-side-bar-bottom {
+  height: calc(100% - 250px);
+}
+
+.scout-side-bar .scout-side-bar-bottom ul li {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.scout-side-bar .scout-side-bar-bottom ul li a {
+  display: flex;
+  padding: 15px 20px;
+  font-size: 16px;
+  color: #ffffff;
+  align-items: center;
+  justify-content: center;
+}
+
+.scout-side-bar .scout-side-bar-bottom ul li a .scout-icon {
+  margin-left: 15px;
+}
+
+.scout-side-bar .scout-side-bar-bottom ul li.active a {
+  background: #ffffff;
+  color: #1c4a69;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  position: relative;
+  right: -1px;
+}
+
+/* Player Cards Styling */
+.scout-player-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+  justify-content: center;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.scout-player-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  height: auto;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eaeaea;
+}
+
+.scout-player-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  border-color: #3e8c74;
+}
+
+.scout-player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.scout-player-header h3 {
+  font-size: 22px;
+  color: #1c4a69;
+  font-weight: 700;
+}
+
+.scout-rating {
+  background-color: #3e8c74;
+  color: white;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.scout-player-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.scout-player-info p {
+  margin: 12px 0;
+  color: #555;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.scout-player-info p:before {
+  content: "•";
+  color: #3e8c74;
+  margin-right: 8px;
+  margin-left: 0;
+  font-size: 18px;
+}
+
+.scout-button-container {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.scout-nav-button {
+  background-color: #3e8c74;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.scout-nav-button:hover {
+  background-color: #1c4a69;
+}
+
+/* Overlay for expanded card */
+.scout-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.scout-expanded-card {
+  background-color: white;
+  border-radius: 15px;
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: cardExpand 0.3s ease-out;
+}
+
+@keyframes cardExpand {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.scout-close-btn {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  transition: all 0.2s;
+}
+
+.scout-close-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.scout-expanded-card .scout-player-header {
+  margin-bottom: 25px;
+  border-bottom: 2px solid #3e8c74;
+  padding-bottom: 15px;
+}
+
+.scout-expanded-card .scout-player-header h3 {
+  font-size: 28px;
+}
+
+.scout-expanded-card .scout-rating {
+  width: 50px;
+  height: 50px;
+  font-size: 22px;
+}
+
+.scout-expanded-card .scout-player-info p {
+  font-size: 20px;
+  margin: 15px 0;
+}
+
+/* Page transition animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Content containers */
+.scout-content-container {
+  display: none;
+}
+
+.scout-content-container.active {
+  display: block;
+  animation: fadeIn 0.5s ease-out;
+  margin-top: 20px;
+}
+
+/* Pagination indicator */
+.scout-pagination-indicator {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.scout-page-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ddd;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.scout-page-dot.active {
+  background-color: #3e8c74;
+}
+
+/* Menu item text and icon */
+.scout-menu-text {
+  margin-left: 15px;
+}
+
+/* pagination fot Scout Card*/
+.pagination {
+  text-align: center;
+  margin-top: 10px;
+}
+.pagination a {
+  margin: 0 5px;
+  padding: 5px 10px;
+  color: #3E8C74;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  cursor: pointer; 
+}
+.pagination a.active {
+  font-weight: bold;
+  background: linear-gradient(135deg, #1C4A69, #3E8C74);
+  color: white;
+}
+
+.scout-player-card {
+  border: 1px solid #eee;
+  padding: 10px;
+  text-align: center;
+}

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/report.css">
     <link rel="stylesheet" href="../css/recommendations.css">
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/dashboardScout.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Include Leaflet CSS and JS -->
@@ -29,7 +30,11 @@
         <div class="main_content">
             <!-- Include dashboard -->
             <div id="dashboard" class="content-container active">
+              <% if (accountType === 'player') { %>
                 <%- include('../components/dashboard') %>
+              <% } else if (accountType === 'scout') { %>
+                <%- include('../components/dashboardScout') %>
+              <% } %>
             </div>
 
             <!-- Include form -->
@@ -47,7 +52,8 @@
             </div>
         </div>
     </div>
-
+    
+    <script src="../js/dashboardScout.js"></script>
     <script src="../js/Formscripts.js"></script>   
     <script src="../js/MainScript.js"></script>
     <script src="../js/report.js"></script>

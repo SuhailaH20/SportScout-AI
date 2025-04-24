@@ -12,11 +12,11 @@ const indexrout = (req, res) => {
     res.render("index", { userName }); // Pass userName to the view
 }
 // GET Requests
-// إنشاء حساب
 const createGet = (req, res) => {
     res.render("pages/createAccount", {});
 }
 
+// Get request form
 // Get request form
 const MainGet = async (req, res) => {
     try {
@@ -26,16 +26,17 @@ const MainGet = async (req, res) => {
         const neighborhoods = response.data.neighborhoods;
         const userName = req.session.userName;
         const userId = req.session.userId;
+        const accountType = req.session.accountType; 
 
         if (!userId) {
             return res.status(401).send('User not authenticated');
         }
 
-        const user = await (req.session.accountType === 'player' ? Player.findById(userId) : Scout.findById(userId)).select('email birthdate name').lean();
+        const user = await (accountType === 'player' ? Player.findById(userId) : Scout.findById(userId)).select('email birthdate name').lean();
 
         let userEmail = user ? user.email : '';
         let userBirthdate = user ? (user.birthdate ? user.birthdate.toISOString().split('T')[0] : '') : '';
-        const currentUserName = user ? user.name : userName; // استخدام اسم المستخدم من قاعدة البيانات إذا كان متاحًا
+        const currentUserName = user ? user.name : userName; 
 
         // Fetch data from FormSubmission collection
         const formSubmissions = await FormSubmission.find({ userId }).lean();
@@ -69,7 +70,8 @@ const MainGet = async (req, res) => {
             userName: currentUserName,
             combinedData,
             userEmail,
-            userBirthdate
+            userBirthdate,
+            accountType 
         });
     } catch (error) {
         console.error('Error fetching data:', error);
