@@ -26,7 +26,7 @@ const MainGet = async (req, res) => {
         const neighborhoods = response.data.neighborhoods;
         const userName = req.session.userName;
         const userId = req.session.userId;
-        const accountType = req.session.accountType; 
+        const accountType = req.session.accountType;
 
         if (!userId) {
             return res.status(401).send('User not authenticated');
@@ -36,7 +36,7 @@ const MainGet = async (req, res) => {
 
         let userEmail = user ? user.email : '';
         let userBirthdate = user ? (user.birthdate ? user.birthdate.toISOString().split('T')[0] : '') : '';
-        const currentUserName = user ? user.name : userName; 
+        const currentUserName = user ? user.name : userName;
 
         // Fetch data from FormSubmission collection
         const formSubmissions = await FormSubmission.find({ userId }).lean();
@@ -63,6 +63,22 @@ const MainGet = async (req, res) => {
         // Combine data from both sources
         const combinedData = [...formSubmissions];
 
+        let players = [];
+        if (req.session.accountType === 'scout') {
+            players = await Player.find().lean(); 
+            for (let player of players) {
+                const latestTestResult = await TestResult.findOne({ userId: player._id }).sort({ createdAt: -1 }).lean();
+                player.rating = latestTestResult ? latestTestResult.rating : null;
+            }
+        } else if (req.session.accountType === 'player') {
+            const player = await Player.findById(req.session.userId).lean();
+            if (player) {
+                const latestTestResult = await TestResult.findOne({ userId: player._id }).sort({ createdAt: -1 }).lean();
+                player.rating = latestTestResult ? latestTestResult.rating : null;
+                players = [player];
+            }
+        }
+
         // Pass everything to the EJS view, including combined data and user details
         res.render('pages/Main', {
             activities,
@@ -71,14 +87,14 @@ const MainGet = async (req, res) => {
             combinedData,
             userEmail,
             userBirthdate,
-            accountType 
+            accountType,
+            players: players
         });
     } catch (error) {
         console.error('Error fetching data:', error);
         res.status(500).send('Error fetching data');
     }
 };
-
 
 //Get Recommendations
 const GetRecommendations = async (req, res) => {
